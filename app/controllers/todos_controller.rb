@@ -11,9 +11,9 @@ class TodosController < ApplicationController
 
   def show
     begin
-    render json: Todo.find(params[:id]), status: 200
-    rescue ActionController::ParameterMissing => error
-    render json: { error: error.message }, status: 422
+      render json: Todo.find(params[:id]), status: 200
+    rescue ActiveRecord::RecordNotFound => error
+      render json: { error: error.message }, status: 422
     end
   end
 
