@@ -2,11 +2,13 @@ Rails.application.routes.draw do
 
 get '/todos/', to: 'todos#index'
 
-get '/todos/:entry', to: 'todos#new'
+get '/todos/new', to: 'todos#new'
 
-get '/todos/:entry', to: 'todos#show'
 
-get '/todos/:completed', to: 'todos#error'
+
+get '/todos/:id', to: 'todos#show'
+
+# get '/todos/:completed', to: 'todos#error'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

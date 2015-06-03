@@ -1,17 +1,20 @@
 class TodosController < ApplicationController
 
   def index
-      todo = Todo.all
-      todo = todo.map do |todo|
-        "#{todo[:entry]}"
-      end
-      render json: "#{todo}", status: 200
+    render json: Todo.all, status: 200
   end
 
   def new
+    render json: Todo.new, status: 200
   end
 
+
   def show
+    begin
+    render json: Todo.find(params[:id]), status: 200
+    rescue ActionController::ParameterMissing => error
+    render json: { error: error.message }, status: 422
+    end
   end
 
   def error
@@ -20,51 +23,10 @@ class TodosController < ApplicationController
 end
 
 
+# Going to http://localhost:3000/todos/new should display an empty (new) todo as JSON
 
 
 
-
-
- # def puts_all_users
- #      user = User.all
- #      all_users = user.map do |user|
- #        "#{user[:first_name]} #{user[:last_name]} Age #{user[:age]} #{params.inspect}"
- #      end
- #      render text: all_users.join("</br></br>"), status: 200
- #    end
-
- #    def puts_one_user
- #      if User.exists?(params[:id])
- #      user = User.find(params[:id])
- #      render text: "#{user.first_name}", status: 200
- #      else render text: "404 User Not Found", status: 404
- #      end
- #    end
-
-
-
-
-# Given the url http://localhost:3000/users?first_name=s
-# I should see ALL users from the database where first_name starts with s.
-
-
-
-
-
-
-
-
-# require_relative "todo"
-# require_relative "../db/setup.rb"
-
-# class TodoList
-
-#   def start
-#     loop do
-#       @todos = Todo.all
-#       system('clear')
-
-#       puts "---- TODO LIST ----"
 
 #       view_todos
 
@@ -100,40 +62,5 @@ end
 #     Todo.update(get_input, completed: true)
 #   end
 
-#   private
-#   def get_input
-#     gets.chomp
-#   end
-# end
 
 
-
-
-
-
-
-
-
-
-# class UsersController < ApplicationController
-
-#     def puts_all_users
-#       user = User.all
-#       all_users = user.map do |user|
-#         "#{user[:first_name]} #{user[:last_name]} Age #{user[:age]} #{params.inspect}"
-#       end
-#       render text: all_users.join("</br></br>"), status: 200
-#     end
-
-#     def puts_one_user
-#       if User.exists?(params[:id])
-#       user = User.find(params[:id])
-#       render text: "#{user.first_name}", status: 200
-#       else render text: "404 User Not Found", status: 404
-#       end
-#     end
-
-# end
-
-# # Given the url http://localhost:3000/users?first_name=s
-# # I should see ALL users from the database where first_name starts with s.
