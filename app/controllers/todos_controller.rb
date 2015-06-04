@@ -21,7 +21,21 @@ class TodosController < ApplicationController
     Todo.create(entry: params[:entry])
   end
 
+  def delete
+    begin
+      Todo.destroy(params[:id])
+    rescue ActiveRecord::RecordNotFound => error
+      render json: "deleted", status: 200
+    end
+  end
+
 end
+
+
+
+# Sending a DELETE request to http://localhost:3000/todos/1
+# should delete that todo from the database and return
+# the message “deleted” as json (Using Postman)
 
 
 
