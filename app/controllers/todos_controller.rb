@@ -8,7 +8,6 @@ class TodosController < ApplicationController
     render json: Todo.new, status: 200
   end
 
-
   def show
     begin
       render json: Todo.find(params[:id]), status: 200
@@ -18,7 +17,7 @@ class TodosController < ApplicationController
   end
 
   def create
-    Todo.create(entry: params[:entry])
+    render json: Todo.create(entry: params[:entry])
   end
 
   def delete
