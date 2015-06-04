@@ -17,50 +17,14 @@ class TodosController < ApplicationController
     end
   end
 
-  def error
+  def create
+    Todo.create(entry: params[:entry])
   end
 
 end
 
 
-# Going to http://localhost:3000/todos/new should display an empty (new) todo as JSON
 
-
-
-
-#       view_todos
-
-#       puts
-#       puts "What would you like to do?"
-#       puts "1) Exit 2) Add Todo 3) Mark Todo As Complete"
-#       print " > "
-#       action = gets.chomp.to_i
-#       case action
-#       when 1 then exit
-#       when 2 then add_todo
-#       when 3 then mark_todo
-#       else
-#         puts "\a"
-#         puts "Not a valid choice"
-#       end
-#     end
-#   end
-
-#   def add_todo
-#     puts "Add your todo item"
-#     Todo.create(entry: get_input)
-#   end
-
-#   def view_todos
-#     @todos.each do |item|
-#     puts "   #{item.id}) #{item.entry} #{item.completed}  "
-#     end
-#   end
-
-#   def mark_todo
-#     puts "Which item have you completed?"
-#     Todo.update(get_input, completed: true)
-#   end
-
-
+# Sending a POST request to http://localhost:3000/todos with the params of { "body": "Finish Homework" }
+# I should see my todo returned to me as json (Using Postman)
 
