@@ -1,31 +1,29 @@
 class TodosController < ApplicationController
 
   def index
-    render json: Todo.all, status: 200
+    render json: Todo.all
   end
 
   def new
-    render json: Todo.new, status: 200
-  end
-
-  def show
-    begin
-      render json: Todo.find(params[:id]), status: 200
-    rescue ActiveRecord::RecordNotFound => error
-      render json: { error: error.message }, status: 422
-    end
+    render json: Todo.new
   end
 
   def create
     render json: Todo.create(entry: params[:entry])
   end
 
-  def delete
+  def show
     begin
-      Todo.destroy(params[:id])
+      render json: Todo.find(params[:id])
     rescue ActiveRecord::RecordNotFound => error
-      render json: "deleted", status: 200
+      render json: { error: error.message }, status: 422
     end
+  end
+
+  def delete
+    todo = Todo.find(params[:id])
+    todo.destroy
+    render json: { message: "Todo Detroyed" }
   end
 
 end
