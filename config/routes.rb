@@ -10,4 +10,8 @@ delete '/todos/:id', to: 'todos#delete'
 
 get '/todos/:id', to: 'todos#show'
 
+root to: 'todos#index'
+
+match '*not_found_route', to: 'application#skip_cors', via: [:get, :post, :put, :delete]
+
 end
